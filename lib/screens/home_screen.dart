@@ -5,35 +5,44 @@ import '../widgets/app_bar.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
+  // Color palette
+  static const Color tealBlue = Color(0xFF33869C);
+  static const Color dustyRose = Color(0xFF885053);
+  static const Color lavender = Color(0xFF797CA5);
+  static const Color terracotta = Color(0xFFD5583C);
+  static const Color sageGreen = Color(0xFF9EC686);
+  static const Color mustardYellow = Color(0xFFCAC548);
+  static const Color backgroundColor = Color(0xFFF8F5F2); // Slightly warmer background
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF2E9E4), // light beige background
+      backgroundColor: backgroundColor,
       appBar: const CustomAppBar(title: 'GamYam'),
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
           physics: const BouncingScrollPhysics(),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Greeting section
+              // Greeting section with avatar
               _buildGreetingSection(context),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               
-              // Daily wellness score
+              // Daily wellness score with improved gradient
               _buildWellnessScoreCard(context),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               
-              // Quick action buttons
+              // Quick action buttons with new colors
               _buildQuickActionSection(context),
-              const SizedBox(height: 30),
+              const SizedBox(height: 32),
               
-              // Today's habits
+              // Today's habits with enhanced visuals
               _buildTodayHabitsSection(context),
-              const SizedBox(height: 24),
+              const SizedBox(height: 28),
               
-              // Mental wellness tips
+              // Mental wellness tips with new styling
               _buildMentalTipsSection(context),
             ],
           ),
@@ -54,28 +63,39 @@ class HomeScreen extends StatelessWidget {
                 'Good morning,',
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                       color: Colors.black54,
+                      fontSize: 16,
                     ),
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 6),
               Text(
                 'Ravi',
                 style: Theme.of(context).textTheme.displayMedium?.copyWith(
                       fontWeight: FontWeight.bold,
+                      color: tealBlue,
                     ),
               ),
             ],
           ),
         ),
+        // Notification icon with enhanced styling
         Container(
-          width: 50,
-          height: 50,
+          width: 54,
+          height: 54,
           decoration: BoxDecoration(
-            color: const Color(0xFFD4A373).withOpacity(0.2),
-            borderRadius: BorderRadius.circular(15),
+            color: tealBlue.withOpacity(0.15),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: [
+              BoxShadow(
+                color: tealBlue.withOpacity(0.1),
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
           ),
           child: const Icon(
             Icons.notifications_outlined,
-            color: Color(0xFFD4A373),
+            color: tealBlue,
+            size: 28,
           ),
         ),
       ],
@@ -84,19 +104,19 @@ class HomeScreen extends StatelessWidget {
 
   Widget _buildWellnessScoreCard(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         gradient: const LinearGradient(
-          colors: [Color(0xFF4A80F0), Color(0xFF7B68EE)],
+          colors: [tealBlue, lavender],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.circular(24),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF4A80F0).withOpacity(0.3),
+            color: tealBlue.withOpacity(0.25),
             blurRadius: 20,
-            offset: const Offset(0, 10),
+            offset: const Offset(0, 8),
           ),
         ],
       ),
@@ -110,11 +130,12 @@ class HomeScreen extends StatelessWidget {
                   'Today\'s Wellness Score',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 17,
                     fontWeight: FontWeight.w500,
+                    letterSpacing: 0.3,
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 22),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
@@ -122,15 +143,15 @@ class HomeScreen extends StatelessWidget {
                       '78',
                       style: TextStyle(
                         color: Colors.white,
-                        fontSize: 40,
+                        fontSize: 44,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(width: 8),
+                    const SizedBox(width: 10),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                       decoration: BoxDecoration(
-                        color: Colors.white24,
+                        color: Colors.white.withOpacity(0.3),
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: const Row(
@@ -140,12 +161,12 @@ class HomeScreen extends StatelessWidget {
                             color: Colors.white,
                             size: 14,
                           ),
-                          SizedBox(width: 2),
+                          SizedBox(width: 4),
                           Text(
                             '4%',
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 12,
+                              fontSize: 13,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
@@ -154,28 +175,33 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(height: 6),
                 const Text(
                   'Good progress today!',
                   style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
+                    color: Colors.white,
+                    fontSize: 15,
+                    letterSpacing: 0.2,
                   ),
                 ),
               ],
             ),
           ),
           Container(
-            width: 80,
-            height: 80,
+            width: 88,
+            height: 88,
             decoration: BoxDecoration(
-              color: Colors.white24,
-              borderRadius: BorderRadius.circular(40),
+              color: Colors.white.withOpacity(0.3),
+              borderRadius: BorderRadius.circular(44),
+              border: Border.all(
+                color: Colors.white.withOpacity(0.4),
+                width: 2,
+              ),
             ),
             child: const Icon(
               Icons.favorite,
               color: Colors.white,
-              size: 40,
+              size: 42,
             ),
           ),
         ],
@@ -187,11 +213,22 @@ class HomeScreen extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Quick Actions',
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Quick Actions',
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.black87,
+                  ),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(Icons.more_horiz, color: Colors.black54),
+            ),
+          ],
         ),
         const SizedBox(height: 16),
         Row(
@@ -199,28 +236,28 @@ class HomeScreen extends StatelessWidget {
             _buildQuickActionButton(
               context,
               icon: Icons.water_drop,
-              color: const Color(0xFF4A80F0),
+              color: tealBlue,
               label: 'Water',
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             _buildQuickActionButton(
               context,
               icon: Icons.restaurant_menu,
-              color: const Color(0xFFE76F51),
+              color: terracotta,
               label: 'Food',
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             _buildQuickActionButton(
               context,
               icon: Icons.mood,
-              color: const Color(0xFF7209B7),
+              color: lavender,
               label: 'Mood',
             ),
-            const SizedBox(width: 12),
+            const SizedBox(width: 14),
             _buildQuickActionButton(
               context,
               icon: Icons.directions_run,
-              color: const Color(0xFF4CAF50),
+              color: sageGreen,
               label: 'Exercise',
             ),
           ],
@@ -239,24 +276,32 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            width: 50,
-            height: 50,
+            width: 58,
+            height: 58,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(15),
+              color: color.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: color.withOpacity(0.1),
+                  blurRadius: 6,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
             child: Icon(
               icon,
               color: color,
-              size: 24,
+              size: 28,
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 10),
           Text(
             label,
-            style: const TextStyle(
-              fontSize: 12,
+            style: TextStyle(
+              fontSize: 13,
               fontWeight: FontWeight.w500,
+              color: color.withOpacity(0.85),
             ),
           ),
         ],
@@ -275,11 +320,21 @@ class HomeScreen extends StatelessWidget {
               'Today\'s Habits',
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                    color: Colors.black87,
                   ),
             ),
             TextButton(
               onPressed: () {},
-              child: const Text('See All'),
+              style: TextButton.styleFrom(
+                foregroundColor: tealBlue,
+              ),
+              child: const Text(
+                'See All',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ],
         ),
@@ -287,23 +342,23 @@ class HomeScreen extends StatelessWidget {
         _buildHabitItem(
           context,
           icon: Icons.water_drop,
-          color: const Color(0xFF4A80F0),
+          color: tealBlue,
           title: 'Drink 2L of water',
           progress: 0.7,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         _buildHabitItem(
           context,
           icon: Icons.directions_run,
-          color: const Color(0xFF4CAF50),
+          color: sageGreen,
           title: '30 min exercise',
           progress: 0.5,
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 14),
         _buildHabitItem(
           context,
           icon: Icons.book,
-          color: const Color(0xFFE76F51),
+          color: terracotta,
           title: 'Read for 20 minutes',
           progress: 0.0,
         ),
@@ -319,14 +374,14 @@ class HomeScreen extends StatelessWidget {
     required double progress,
   }) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(18),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(18),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.04),
+            blurRadius: 12,
             offset: const Offset(0, 4),
           ),
         ],
@@ -334,10 +389,10 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            padding: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(12),
             decoration: BoxDecoration(
-              color: color.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+              color: color.withOpacity(0.15),
+              borderRadius: BorderRadius.circular(14),
             ),
             child: Icon(
               icon,
@@ -345,7 +400,7 @@ class HomeScreen extends StatelessWidget {
               size: 24,
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 18),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,34 +408,38 @@ class HomeScreen extends StatelessWidget {
                 Text(
                   title,
                   style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.w500,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black87,
                       ),
                 ),
-                const SizedBox(height: 8),
+                const SizedBox(height: 10),
                 ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(12),
                   child: LinearProgressIndicator(
                     value: progress,
-                    backgroundColor: Colors.black.withOpacity(0.05),
+                    backgroundColor: Colors.black.withOpacity(0.06),
                     color: color,
-                    minHeight: 8,
+                    minHeight: 9,
                   ),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
+          const SizedBox(width: 18),
           Container(
-            width: 36,
-            height: 36,
+            width: 42,
+            height: 42,
             decoration: BoxDecoration(
-              color: progress > 0 ? color.withOpacity(0.1) : Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+              color: progress > 0 ? color.withOpacity(0.15) : Colors.grey.withOpacity(0.12),
+              borderRadius: BorderRadius.circular(14),
+              border: progress > 0
+                  ? Border.all(color: color.withOpacity(0.3), width: 1.5)
+                  : null,
             ),
             child: Icon(
               progress > 0 ? Icons.check : Icons.add,
               color: progress > 0 ? color : Colors.grey,
-              size: 20,
+              size: 22,
             ),
           ),
         ],
@@ -396,64 +455,95 @@ class HomeScreen extends StatelessWidget {
           'Mental Wellness',
           style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: Colors.black87,
               ),
         ),
         const SizedBox(height: 16),
         Container(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(22),
           decoration: BoxDecoration(
-            color: const Color(0xFF7209B7).withOpacity(0.1),
-            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(22),
             border: Border.all(
-              color: const Color(0xFF7209B7).withOpacity(0.2),
-              width: 1,
+              color: dustyRose.withOpacity(0.2),
+              width: 1.5,
             ),
+            boxShadow: [
+              BoxShadow(
+                color: dustyRose.withOpacity(0.08),
+                blurRadius: 15,
+                offset: const Offset(0, 5),
+              ),
+            ],
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
-                  const Icon(
-                    Icons.tips_and_updates,
-                    color: Color(0xFF7209B7),
-                    size: 24,
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                      color: dustyRose.withOpacity(0.15),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: const Icon(
+                      Icons.tips_and_updates,
+                      color: dustyRose,
+                      size: 24,
+                    ),
                   ),
-                  const SizedBox(width: 12),
+                  const SizedBox(width: 14),
                   Text(
                     'Daily Tip',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: const Color(0xFF7209B7),
+                          color: dustyRose,
                           fontWeight: FontWeight.w600,
+                          fontSize: 18,
                         ),
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 18),
               Text(
                 '"Take a few moments today to practice deep breathing. Just 5 minutes of mindful breathing can significantly reduce stress and improve mental clarity."',
                 style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.black87,
-                      height: 1.5,
+                      height: 1.6,
+                      fontSize: 15,
                     ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 22),
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF7209B7),
+                  backgroundColor: dustyRose,
                   foregroundColor: Colors.white,
                   elevation: 0,
-                  minimumSize: const Size(double.infinity, 44),
+                  minimumSize: const Size(double.infinity, 52),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(16),
                   ),
+                  padding: const EdgeInsets.symmetric(vertical: 12),
                 ),
-                child: const Text(
-                  'Try 2-Minute Meditation',
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                  ),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.self_improvement,
+                      size: 20,
+                    ),
+                    SizedBox(width: 10),
+                    Text(
+                      'Try 2-Minute Meditation',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 16,
+                        letterSpacing: 0.3,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
