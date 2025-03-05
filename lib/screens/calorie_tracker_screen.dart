@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class EmotionTrackerScreen extends StatelessWidget {
+class CalorieTrackerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Emotion Tracker'),
-        backgroundColor: Colors.orange,
+        title: Text('Calorie Tracker'),
+        backgroundColor: Colors.purple,
       ),
       body: Center(
         child: Text(
-          'Track Your Emotions',
+          'Track Your Calories',
           style: TextStyle(fontSize: 24),
         ),
       ),

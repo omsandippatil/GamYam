@@ -31,9 +31,10 @@ dependencies:
   flutter:
     sdk: flutter
   
-  flutter_riverpod: ^2.4.0  # Move this outside of 'flutter:'
-  cupertino_icons: ^1.0.8
-
+  google_fonts: ^4.0.4 
+  fl_chart: ^0.70.2
+  percent_indicator: ^4.2.4
+  syncfusion_flutter_charts: ^28.2.9
 
 dev_dependencies:
   flutter_test:
