@@ -1,135 +1,263 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-// Import screens
-import 'screens/dashboard_screen.dart';
-import 'screens/calorie_tracker_screen.dart';
-import 'screens/emotion_tracker_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'screens/home_screen.dart';
 
 void main() {
-  runApp(GamYamApp());
+  runApp(const MyApp());
 }
 
-class GamYamApp extends StatelessWidget {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'GamYam',
+      title: 'Gamyam',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.pink,
-        scaffoldBackgroundColor: Color(0xFFF5E6D3), // Light beige background
-        textTheme: GoogleFonts.montserratTextTheme(),
+        primaryColor: const Color(0xFFD0BFE6), // Light Purple
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(),
-      routes: {
-        '/dashboard': (context) => DashboardScreen(),
-        '/calorie-tracker': (context) => CalorieTrackerScreen(),
-        '/emotion-tracker': (context) => EmotionTrackerScreen(),
-      },
+      home: const WelcomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'గమ్యం | GamYam',
-              style: GoogleFonts.poppins(
-                fontSize: 64,
-                fontWeight: FontWeight.w900,
-                color: Colors.pink[800],
-                letterSpacing: 1.5,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [Color(0xFFDECFF4), Color(0xFFD0BFE6)], // Gradient background
+          ),
+        ),
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Top spacing
+              SizedBox(height: screenHeight * 0.06),
+              
+              // Artwork image - removed the box but kept the image
+              Center(
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(24),
+                  child: Image.asset(
+                    'images/welcome-screen.png',
+                    width: screenWidth * 0.75,
+                    height: screenHeight * 0.28,
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
-            SizedBox(height: 50),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildCircularButton(
-                  icon: Icons.bar_chart_rounded,
-                  color: Colors.purple,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/dashboard');
-                  },
+              
+              // Spacing between image and title
+              SizedBox(height: screenHeight * 0.06),
+              
+              // Logo and app name with enhanced styling
+              Center(
+                child: Column(
+                  children: [
+                    Text(
+                      'GAMYAM',
+                      style: GoogleFonts.playfairDisplay(
+                        fontSize: 48,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 3.5,
+                        color: const Color(0xFF2E2E2E), // Dark Brown/Black
+                        shadows: [
+                          Shadow(
+                            blurRadius: 3.0,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 12), // Increased spacing
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 2),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF9F86C0).withOpacity(0.12),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: const Text(
+                        'கம்யம்', // Gamyam in Tamil
+                        style: TextStyle(
+                          fontFamily: 'Bamini', // Tamil font
+                          fontSize: 36,
+                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF9F86C0), // Purple
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                SizedBox(width: 30),
-                _buildCircularButton(
-                  icon: Icons.restaurant_menu,
-                  color: Colors.teal,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/calorie-tracker');
-                  },
+              ),
+              
+              // Spacing between names and tagline
+              SizedBox(height: screenHeight * 0.03),
+              
+              // Tagline with enhanced styling
+              Center(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: Text(
+                    'Your journey to mindfulness',
+                    textAlign: TextAlign.center,
+                    style: GoogleFonts.poppins(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w300,
+                      color: const Color(0xFF2E2E2E), // Dark Brown/Black
+                      letterSpacing: 0.8,
+                      height: 1.4,
+                    ),
+                  ),
                 ),
-                SizedBox(width: 30),
-                _buildCircularButton(
-                  icon: Icons.psychology_alt_outlined,
-                  color: Colors.orange,
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/emotion-tracker');
-                  },
+              ),
+              
+              // Flexible space - adjusts based on screen size
+              Expanded(
+                child: SizedBox(height: screenHeight * 0.06),
+                flex: 2,
+              ),
+              
+              // Feature icons with improved styling
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 36),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    // Food icon (darker green)
+                    buildFeatureItem(
+                      icon: Icons.restaurant,
+                      label: 'Food',
+                      color: const Color(0xFF8DAB7F), // Darker Green
+                      iconColor: Colors.white,
+                    ),
+                    
+                    // Health icon (coral)
+                    buildFeatureItem(
+                      icon: Icons.favorite,
+                      label: 'Health',
+                      color: const Color(0xFFFF7854), // Soft Coral
+                      iconColor: Colors.white,
+                    ),
+                    
+                    // Meditate icon (muted orange)
+                    buildFeatureItem(
+                      icon: Icons.self_improvement,
+                      label: 'Meditate',
+                      color: const Color(0xFFF4A261), // Muted Orange
+                      iconColor: Colors.white,
+                    ),
+                    
+                    // Sleep icon (purple)
+                    buildFeatureItem(
+                      icon: Icons.nightlight_round,
+                      label: 'Sleep',
+                      color: const Color(0xFF9F86C0), // Purple
+                      iconColor: Colors.white,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
+              ),
+              
+              // Proper bottom spacing using Expanded instead of fixed SizedBox
+              Expanded(
+                child: const SizedBox(),
+                flex: 1,
+              ),
+              
+              // Get Started Button with improved styling
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const HomeScreen()),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF9F86C0), // Purple
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
+                    elevation: 2,
+                    shadowColor: const Color(0xFF9F86C0).withOpacity(0.5),
+                  ),
+                  child: Text(
+                    'GET STARTED',
+                    style: GoogleFonts.montserrat(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 1.8,
+                    ),
+                  ),
+                ),
+              ),
+              
+              // Bottom safe area padding
+              SizedBox(height: screenHeight * 0.02),
+            ],
+          ),
         ),
       ),
     );
   }
-
-  Widget _buildCircularButton({
+  
+  // Helper method to create feature items
+  Widget buildFeatureItem({
     required IconData icon,
+    required String label,
     required Color color,
-    required VoidCallback onPressed,
+    required Color iconColor,
   }) {
-    return StatefulBuilder(
-      builder: (context, setState) {
-        bool isHovered = false;
-
-        return MouseRegion(
-          onEnter: (_) => setState(() => isHovered = true),
-          onExit: (_) => setState(() => isHovered = false),
-          child: AnimatedContainer(
-            duration: Duration(milliseconds: 300),
-            width: isHovered ? 140 : 120,
-            height: isHovered ? 140 : 120,
-            decoration: BoxDecoration(
-              shape: BoxShape.circle,
-              color: color.withOpacity(isHovered ? 0.3 : 0.2),
-              boxShadow: [
-                BoxShadow(
-                  color: color.withOpacity(isHovered ? 0.5 : 0.3),
-                  spreadRadius: isHovered ? 5 : 3,
-                  blurRadius: isHovered ? 15 : 10,
-                  offset: Offset(0, isHovered ? 8 : 5),
-                ),
-              ],
-              border: isHovered 
-                ? Border.all(color: color.withOpacity(0.5), width: 2)
-                : null,
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                borderRadius: BorderRadius.circular(70),
-                onTap: onPressed,
-                child: Center(
-                  child: Icon(
-                    icon,
-                    size: isHovered ? 70 : 60,
-                    color: color,
-                  ),
-                ),
+    return Column(
+      children: [
+        Container(
+          padding: const EdgeInsets.all(14), // Slightly larger padding
+          decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: color.withOpacity(0.3),
+                blurRadius: 8,
+                offset: const Offset(0, 3),
               ),
-            ),
+            ],
           ),
-        );
-      },
+          child: Icon(
+            icon,
+            color: iconColor,
+            size: 28,
+          ),
+        ),
+        const SizedBox(height: 12), // Increased spacing
+        Text(
+          label,
+          style: GoogleFonts.poppins(
+            color: const Color(0xFF2E2E2E),
+            fontWeight: FontWeight.w500,
+            fontSize: 13,
+            letterSpacing: 0.5,
+          ),
+        ),
+      ],
     );
   }
 }
