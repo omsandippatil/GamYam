@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'screens/home_screen.dart';
+import 'package:google_fonts/google_fonts.dart'; 
+import 'screens/home_screen.dart'; 
+
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
 }
 
 class WelcomePage extends StatelessWidget {
-  const WelcomePage({Key? key}) : super(key: key);
+  const WelcomePage({super.key});
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -128,8 +129,8 @@ class WelcomePage extends StatelessWidget {
               
               // Flexible space - adjusts based on screen size
               Expanded(
-                child: SizedBox(height: screenHeight * 0.06),
                 flex: 2,
+                child: SizedBox(height: screenHeight * 0.06),
               ),
               
               // Feature icons with improved styling
@@ -175,8 +176,8 @@ class WelcomePage extends StatelessWidget {
               
               // Proper bottom spacing using Expanded instead of fixed SizedBox
               Expanded(
-                child: const SizedBox(),
                 flex: 1,
+                child: const SizedBox(),
               ),
               
               // Get Started Button with improved styling

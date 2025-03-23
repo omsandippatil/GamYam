@@ -1,7 +1,7 @@
 import '../models/food_entry.dart';
 
 class CalorieService {
-  List<FoodEntry> _foodEntries = [];
+  final List<FoodEntry> _foodEntries = [];
 
   void addFoodEntry(FoodEntry entry) {
     _foodEntries.add(entry);

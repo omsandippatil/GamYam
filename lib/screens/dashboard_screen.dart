@@ -4,6 +4,8 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
 class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -368,7 +370,7 @@ Widget _buildFocusTimeChart() {
         ),
         SizedBox(height: 10),
         Text(
-          '$current/${total} ${label == "Water" ? "L" : "cal"}',
+          '$current/$total ${label == "Water" ? "L" : "cal"}',
           style: GoogleFonts.nunito(
             color: color,
             fontWeight: FontWeight.w700,
@@ -451,7 +453,7 @@ Widget _buildFocusTimeChart() {
           ),
           SizedBox(height: 5),
           Text(
-            '${hours} hrs',
+            '$hours hrs',
             style: GoogleFonts.poppins(
               color: color,
               fontSize: 18,

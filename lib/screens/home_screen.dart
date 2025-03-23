@@ -1,315 +1,403 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:gamyam/screens/profile_screen.dart';  
+import 'package:gamyam/widgets/floating_navbar.dart';  
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF5F5DC), // Light beige background
+      backgroundColor: const Color(0xFFF5F2EA), // Light beige background
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              // Top Row with Profile and Heart Counter
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text(
-                    'Dashboard',
-                    style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Dashboard',
+                      style: GoogleFonts.poppins(
+                        fontSize: 34,
+                        fontWeight: FontWeight.w600,
+                        color: const Color(0xFF2D3142),
+                        letterSpacing: -0.5,
+                      ),
                     ),
-                  ),
-                  Row(
-                    children: [
-                      // Heart with count
-                      Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFFF6B6B),
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.favorite, color: Colors.white, size: 24),
-                            const SizedBox(width: 8),
-                            Text(
-                              '5',
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(width: 16),
-                      // Profile button
-                      CircleAvatar(
-                        radius: 22,
-                        backgroundColor: const Color(0xFF3D405B),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                          size: 22,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              
-              const SizedBox(height: 24),
-              
-              // Life Bar
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Life Energy',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                      Text(
-                        '75%',
-                        style: GoogleFonts.poppins(
-                          fontWeight: FontWeight.w600,
-                          fontSize: 16,
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    height: 16,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
+                    Row(
                       children: [
                         Container(
-                          width: MediaQuery.of(context).size.width * 0.75 - 32,
-                          height: 16,
+                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF2ECC71),
-                            borderRadius: BorderRadius.circular(10),
+                            color: const Color(0xFFFF6B6B),
+                            borderRadius: BorderRadius.circular(24),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color(0xFFFF6B6B).withOpacity(0.2),
+                                blurRadius: 12,
+                                offset: const Offset(0, 4),
+                              ),
+                            ],
+                          ),
+                          child: Row(
+                            children: [
+                              const Icon(
+                                Icons.favorite,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                              const SizedBox(width: 8),
+                              Text(
+                                '5',
+                                style: GoogleFonts.montserrat(
+                                  color: Colors.white,
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 20),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => const ProfileScreen()),
+                            );
+                          },
+                          child: Container(
+                            height: 54,
+                            width: 54,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFF3D405B),
+                              shape: BoxShape.circle,
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF3D405B).withOpacity(0.18),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: const Icon(
+                              Icons.person,
+                              color: Colors.white,
+                              size: 26,
+                            ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                ],
-              ),
-              
-              const SizedBox(height: 24),
-              
-              // Four Cards
-              GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 16,
-                mainAxisSpacing: 16,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                children: [
-                  // Calories Burned Card
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFF6B6B), // Orangish red
-                      borderRadius: BorderRadius.circular(16),
+                  ],
+                ),
+                
+                const SizedBox(height: 40),
+                
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Life Energy',
+                          style: GoogleFonts.poppins(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 20,
+                            color: const Color(0xFF2D3142),
+                          ),
+                        ),
+                        Text(
+                          '75%',
+                          style: GoogleFonts.montserrat(
+                            fontWeight: FontWeight.w600,
+                            fontSize: 24,
+                            color: const Color(0xFF2ECC71),
+                          ),
+                        ),
+                      ],
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    const SizedBox(height: 12),
+                    Container(
+                      height: 16,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.04),
+                            blurRadius: 8,
+                            offset: const Offset(0, 2),
+                          ),
+                        ],
+                      ),
+                      child: Row(
                         children: [
-                          const Icon(Icons.local_fire_department, color: Colors.white, size: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '485',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.75 - 48,
+                            height: 16,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF2ECC71), Color(0xFF1DB954)],
                               ),
-                              Text(
-                                'Calories Burned',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 14,
+                              borderRadius: BorderRadius.circular(16),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF2ECC71).withOpacity(0.2),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ),
-                  ),
-                  
-                  // Time Focused Card
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFFFD166), // Yellow
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(Icons.timer, color: Colors.white, size: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '3.5',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                'Hours Focused',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
-                              ),
-                            ],
+                  ],
+                ),
+                
+                const SizedBox(height: 40),
+                
+                GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 20,
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFFFF6B6B),
+                            const Color(0xFFFF6B6B).withOpacity(0.9),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFFF6B6B).withOpacity(0.2),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  
-                  // Sleep Debt Card
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF9B59B6), // Purple
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(Icons.nightlight_round, color: Colors.white, size: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '1.2',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '485',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 54,
+                                fontWeight: FontWeight.w700,
+                                height: 0.9,
                               ),
-                              Text(
-                                'Sleep Debt (hrs)',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Calories Burned',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
                               ),
-                            ],
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFFFFD166),
+                            const Color(0xFFFFD166).withOpacity(0.9),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFFFFD166).withOpacity(0.2),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
-                    ),
-                  ),
-                  
-                  // Calories Intake Card
-                  Container(
-                    decoration: BoxDecoration(
-                      color: const Color(0xFF2ECC71), // Green
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(Icons.restaurant, color: Colors.white, size: 24),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '1,840',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 32,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '3.5',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 54,
+                                fontWeight: FontWeight.w700,
+                                height: 0.9,
                               ),
-                              Text(
-                                'Calories Intake',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Hours Focused',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
                               ),
-                            ],
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFF9B59B6),
+                            const Color(0xFF9B59B6).withOpacity(0.9),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF9B59B6).withOpacity(0.2),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
                           ),
                         ],
                       ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '1.2',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 54,
+                                fontWeight: FontWeight.w700,
+                                height: 0.9,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Sleep Debt (hrs)',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              
-              const SizedBox(height: 24),
-              
-              // Graphs Section
-              Expanded(
-                child: Container(
+                    
+                    Container(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: [
+                            const Color(0xFF2ECC71),
+                            const Color(0xFF2ECC71).withOpacity(0.9),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(28),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xFF2ECC71).withOpacity(0.2),
+                            blurRadius: 15,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              '1,840',
+                              style: GoogleFonts.montserrat(
+                                color: Colors.white,
+                                fontSize: 54,
+                                fontWeight: FontWeight.w700,
+                                height: 0.9,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+                            Text(
+                              'Calories Intake',
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: 40),
+                
+                Container(
                   width: double.infinity,
+                  height: 360,
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
+                    borderRadius: BorderRadius.circular(28),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 1,
-                        blurRadius: 5,
-                        offset: const Offset(0, 3),
+                        color: Colors.black.withOpacity(0.05),
+                        spreadRadius: 0,
+                        blurRadius: 20,
+                        offset: const Offset(0, 6),
                       ),
                     ],
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           'Weekly Progress',
                           style: GoogleFonts.poppins(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w600,
+                            color: const Color(0xFF2D3142),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
                         Expanded(
                           child: LineChart(
                             LineChartData(
@@ -320,7 +408,7 @@ class HomeScreen extends StatelessWidget {
                                 horizontalInterval: 1,
                                 getDrawingHorizontalLine: (value) {
                                   return FlLine(
-                                    color: Colors.grey.shade200,
+                                    color: Colors.grey.shade100,
                                     strokeWidth: 1,
                                   );
                                 },
@@ -337,9 +425,9 @@ class HomeScreen extends StatelessWidget {
                                   sideTitles: SideTitles(
                                     showTitles: true,
                                     getTitlesWidget: (value, meta) {
-                                      const style = TextStyle(
-                                        color: Color(0xFF3D405B),
-                                        fontSize: 12,
+                                      final style = GoogleFonts.poppins(
+                                        color: const Color(0xFF2D3142),
+                                        fontSize: 14,
                                       );
                                       String text;
                                       switch (value.toInt()) {
@@ -375,11 +463,11 @@ class HomeScreen extends StatelessWidget {
                                 leftTitles: AxisTitles(
                                   sideTitles: SideTitles(
                                     showTitles: true,
-                                    reservedSize: 40,
+                                    reservedSize: 30,
                                     getTitlesWidget: (value, meta) {
-                                      const style = TextStyle(
-                                        color: Color(0xFF3D405B),
-                                        fontSize: 12,
+                                      final style = GoogleFonts.poppins(
+                                        color: const Color(0xFF2D3142),
+                                        fontSize: 14,
                                       );
                                       return Text(
                                         value.toInt().toString(),
@@ -394,7 +482,6 @@ class HomeScreen extends StatelessWidget {
                                 show: false,
                               ),
                               lineBarsData: [
-                                // Calories Burned
                                 LineChartBarData(
                                   spots: const [
                                     FlSpot(0, 3),
@@ -412,10 +499,9 @@ class HomeScreen extends StatelessWidget {
                                   dotData: FlDotData(show: false),
                                   belowBarData: BarAreaData(
                                     show: true,
-                                    color: const Color(0xFFFF6B6B).withOpacity(0.2),
+                                    color: const Color(0xFFFF6B6B).withOpacity(0.15),
                                   ),
                                 ),
-                                // Time Focused
                                 LineChartBarData(
                                   spots: const [
                                     FlSpot(0, 2),
@@ -433,7 +519,7 @@ class HomeScreen extends StatelessWidget {
                                   dotData: FlDotData(show: false),
                                   belowBarData: BarAreaData(
                                     show: true,
-                                    color: const Color(0xFFFFD166).withOpacity(0.2),
+                                    color: const Color(0xFFFFD166).withOpacity(0.15),
                                   ),
                                 ),
                               ],
@@ -448,11 +534,14 @@ class HomeScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-              ),
-            ],
+                
+                const SizedBox(height: 24), // Added space at bottom for better scrolling
+              ],
+            ),
           ),
         ),
       ),
+      bottomNavigationBar: const FloatingNavbar(),
     );
   }
 }
