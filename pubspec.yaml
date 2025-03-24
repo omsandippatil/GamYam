@@ -13,6 +13,7 @@ dependencies:
   
   google_fonts: ^6.2.1
   fl_chart: ^0.70.2
+  cached_network_image: ^3.3.0
   percent_indicator: ^4.2.4
   syncfusion_flutter_charts: ^28.2.11
   font_awesome_flutter: ^10.8.0

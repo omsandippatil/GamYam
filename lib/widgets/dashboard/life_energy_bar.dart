@@ -13,7 +13,7 @@ class LifeEnergyBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'Life Energy',
+              "Today's Lifeline",
               style: GoogleFonts.poppins(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,

@@ -15,7 +15,7 @@ class StatsGrid extends StatelessWidget {
       children: const [
         StatCard(
           value: '485',
-          label: 'Calories Burned',
+          label: 'Calories Burn',
           color: Color(0xFFFF6B6B),
         ),
         StatCard(
@@ -25,11 +25,11 @@ class StatsGrid extends StatelessWidget {
         ),
         StatCard(
           value: '1.2',
-          label: 'Sleep Debt (hrs)',
+          label: 'Sleep Debt',
           color: Color(0xFF9B59B6),
         ),
         StatCard(
-          value: '1,840',
+          value: '1840',
           label: 'Calories Intake',
           color: Color(0xFF2ECC71),
         ),

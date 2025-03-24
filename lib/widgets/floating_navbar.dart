@@ -85,7 +85,7 @@ class FloatingNavbar extends StatelessWidget {
       // Using Material to make InkWell work properly
       child: Material(
         color: Colors.transparent,
-        child: Container(
+        child: SizedBox(
           // Increased tap target size for better touch detection
           width: 60,
           height: 60,

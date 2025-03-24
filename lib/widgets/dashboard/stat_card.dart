@@ -53,7 +53,7 @@ class StatCard extends StatelessWidget {
               label,
               style: GoogleFonts.poppins(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 15,
                 fontWeight: FontWeight.w500,
               ),
               textAlign: TextAlign.center,
