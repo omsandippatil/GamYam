@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gamyam/screens/profile_screen.dart';
 import 'package:gamyam/widgets/floating_navbar.dart';
 import 'package:gamyam/widgets/dashboard/dashboard_header.dart';
 import 'package:gamyam/widgets/dashboard/life_energy_bar.dart';
