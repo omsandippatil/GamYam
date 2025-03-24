@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gamyam/widgets/floating_navbar.dart';
 
 class EmotionTrackerScreen extends StatelessWidget {
   const EmotionTrackerScreen({super.key});
@@ -16,6 +17,7 @@ class EmotionTrackerScreen extends StatelessWidget {
           style: TextStyle(fontSize: 24),
         ),
       ),
+      bottomNavigationBar: const FloatingNavbar(),
     );
   }
 }

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart'; 
-import 'screens/home_screen.dart'; 
-
+import 'screens/home_screen.dart';
+import 'screens/calorie_tracker_screen.dart';
+import 'screens/emotion_tracker_screen.dart';
+import 'screens/sleep_tracker_screen.dart';
+import 'screens/dashboard_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +22,16 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFFD0BFE6), // Light Purple
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: const WelcomePage(),
+      // Define all routes for the app
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/home': (context) => const HomeScreen(),
+        '/calorie-tracker': (context) => const CalorieTrackerScreen(),
+        '/emotion-tracker': (context) => const EmotionTrackerScreen(),
+        '/sleep-tracker': (context) => const SleepTrackerScreen(),
+        '/dashboard': (context) => const DashboardScreen(),
+      },
     );
   }
 }
@@ -27,7 +39,6 @@ class MyApp extends StatelessWidget {
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
  
-
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -185,10 +196,8 @@ class WelcomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const HomeScreen()),
-                    );
+                    // Using named route navigation instead of MaterialPageRoute
+                    Navigator.pushReplacementNamed(context, '/home');
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF9F86C0), // Purple

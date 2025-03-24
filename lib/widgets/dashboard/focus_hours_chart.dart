@@ -32,7 +32,7 @@ class FocusHoursChart extends StatelessWidget {
         borderRadius: BorderRadius.circular(28),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha(13),
             spreadRadius: 0,
             blurRadius: 20,
             offset: const Offset(0, 6),
@@ -84,16 +84,14 @@ class FocusHoursChart extends StatelessWidget {
                       sideTitles: SideTitles(
                         showTitles: true,
                         reservedSize: 30,
+                        // Using a simplified version of getTitlesWidget
                         getTitlesWidget: (value, meta) {
                           if (value.toInt() >= 0 && value.toInt() < days.length) {
-                            return SideTitleWidget(
-                              side: meta.axisSide,
-                              child: Text(
-                                days[value.toInt()],
-                                style: GoogleFonts.poppins(
-                                  color: const Color(0xFF9093A3),
-                                  fontSize: 12,
-                                ),
+                            return Text(
+                              days[value.toInt()],
+                              style: GoogleFonts.poppins(
+                                color: const Color(0xFF9093A3),
+                                fontSize: 12,
                               ),
                             );
                           }
@@ -105,15 +103,13 @@ class FocusHoursChart extends StatelessWidget {
                       sideTitles: SideTitles(
                         showTitles: true,
                         reservedSize: 40,
+                        // Using a simplified version of getTitlesWidget
                         getTitlesWidget: (value, meta) {
-                          return SideTitleWidget(
-                            side: meta.axisSide,
-                            child: Text(
-                              '${value.toInt()}h',
-                              style: GoogleFonts.poppins(
-                                color: const Color(0xFF9093A3),
-                                fontSize: 12,
-                              ),
+                          return Text(
+                            '${value.toInt()}h',
+                            style: GoogleFonts.poppins(
+                              color: const Color(0xFF9093A3),
+                              fontSize: 12,
                             ),
                           );
                         },
