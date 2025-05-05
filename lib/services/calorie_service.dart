@@ -80,7 +80,7 @@ class FoodAnalysisService {
           "fiber": number,
           "sugar": number
         },
-        "additionalDetails": {}
+        "additionalDetails": {health, tips}
       }
       ''';
 
@@ -92,7 +92,7 @@ class FoodAnalysisService {
       };
       
       final body = jsonEncode({
-        'model': 'llava-v1.5-7b-4096',
+        'model': 'meta-llama/llama-4-scout-17b-16e-instruct',
         'messages': [
           {
             'role': 'user',
@@ -111,6 +111,7 @@ class FoodAnalysisService {
           },
         ],
         'max_tokens': 500,
+        'response_format': { 'type': "json_object" }
       });
 
       final response = await http.post(url, headers: headers, body: body);

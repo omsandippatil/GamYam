@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
-import 'dart:typed_data';
 
 import '../../services/calorie_service.dart';
 
@@ -61,7 +60,8 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
         _analysisResult = result;
         _isAnalyzing = false;
         _showResults = true;
-        // Note: We won't have the image path here, but the analysis works
+        // For demonstration, you might want to add image capture logic
+ // Assuming imageData is added to the result
       });
       _animationController.forward(from: 0);
     } catch (e) {
@@ -77,7 +77,7 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
         _analysisResult = result;
         _isAnalyzing = false;
         _showResults = true;
-        // Note: We won't have the image path here, but the analysis works
+  // Assuming imageData is added to the result
       });
       _animationController.forward(from: 0);
     } catch (e) {
@@ -137,12 +137,12 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
         Container(
           padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: Colors.grey[100],
+            color: Colors.green[50],
             borderRadius: BorderRadius.circular(12),
           ),
           child: Icon(
             Icons.analytics_outlined, 
-            color: Colors.grey[800],
+            color: Colors.green[700],
             size: 24,
           ),
         ),
@@ -156,7 +156,7 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
+                  color: Colors.green[800],
                 ),
               ),
               const SizedBox(height: 4),
@@ -164,7 +164,7 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
                 'Analyze your food with a photo',
                 style: TextStyle(
                   fontSize: 13,
-                  color: Colors.grey[600],
+                  color: Colors.green[600],
                 ),
               ),
             ],
@@ -327,6 +327,25 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Display uploaded image
+          if (_selectedImage != null)
+            Center(
+              child: Container(
+                height: 200,
+                width: double.infinity,
+                margin: const EdgeInsets.only(bottom: 20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  image: DecorationImage(
+                    image: kIsWeb 
+                      ? Image.memory(_selectedImage).image 
+                      : FileImage(File(_selectedImage)),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          
           // Summary
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -336,7 +355,7 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w600,
-                  color: Colors.grey[800],
+                  color: Colors.green[800],
                 ),
               ),
               const SizedBox(height: 8),
@@ -365,12 +384,12 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
             style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w600,
-              color: Colors.grey[800],
+              color: Colors.green[800],
             ),
           ),
           const SizedBox(height: 12),
           
-          // Nutrient bars
+          // Nutrient bars with aesthetic design
           _buildNutrientBars(result.nutrients),
           
           const SizedBox(height: 20),
@@ -474,9 +493,19 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
     );
   }
   
+
   Widget _buildNutrientBars(Map<String, double> nutrients) {
     final sortedNutrients = nutrients.entries.toList()
       ..sort((a, b) => b.value.compareTo(a.value));
+    
+    // Color palette for nutrient bars
+    final colors = [
+      Colors.green[400]!,
+      Colors.blue[400]!,
+      Colors.orange[400]!,
+      Colors.purple[400]!,
+      Colors.teal[400]!,
+    ];
     
     return Column(
       children: sortedNutrients.map((entry) {
@@ -487,7 +516,7 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
         final percentage = (value / 50.0).clamp(0.0, 1.0);
         
         return Padding(
-          padding: const EdgeInsets.only(bottom: 8),
+          padding: const EdgeInsets.only(bottom: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -498,39 +527,44 @@ class _CalorieInputWidgetState extends State<CalorieInputWidget> with SingleTick
                     _capitalizeFirstLetter(nutrientName),
                     style: TextStyle(
                       color: Colors.grey[700],
-                      fontSize: 12,
-                      fontWeight: FontWeight.w500,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
                     '${value.toStringAsFixed(1)}g',
                     style: TextStyle(
                       color: Colors.grey[700],
-                      fontSize: 12,
+                      fontSize: 13,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 4),
+              const SizedBox(height: 6),
               Stack(
                 children: [
                   // Background
                   Container(
-                    height: 8,
+                    height: 10,
                     decoration: BoxDecoration(
-                      color: Colors.grey[100],
-                      borderRadius: BorderRadius.circular(4),
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(5),
                     ),
                   ),
-                  // Value bar
+                  // Value bar with gradient
                   FractionallySizedBox(
                     widthFactor: percentage,
                     child: Container(
-                      height: 8,
+                      height: 10,
                       decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: BorderRadius.circular(4),
+                        gradient: LinearGradient(
+                          colors: [
+                            colors[sortedNutrients.indexOf(entry) % colors.length],
+                            colors[sortedNutrients.indexOf(entry) % colors.length].withOpacity(0.7),
+                          ],
+                        ),
+                        borderRadius: BorderRadius.circular(5),
                       ),
                     ),
                   ),
